@@ -22,3 +22,6 @@ The following poster is all Star Wars episodes condensed into a strip of dominan
 - [Star Wars Main Movies](./examples/star-wars/README.md)
 
 - [Lord of the Rings Movies](./examples/lord-of-the-rings/README.md)
+
+- [Harry Potter](./examples/harry-potter/README.md)
+
