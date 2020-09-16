@@ -6,6 +6,7 @@ NAME=$(basename "${VIDEO%.*}")
 
 # tack on .png as the output image extension
 IMG_NAME=$NAME.png
+SVG_NAME=$NAME.svg
 
 # remove spaces from the output folder name because no one likes spaces
 OUTPUT_FOLDER=`echo $NAME | tr '\ ' '_'`
@@ -20,7 +21,7 @@ echo OUTPUT_FOLDER: $OUTPUT_FOLDER
 # create the output folder
 mkdir -p $OUTPUT_FOLDER
 
-# OPTIONAL - get the output length in seconds/frames of the video
+# OPTIONAL - get the output length in seconds/frames of the video. Could be used in the "convert -resize" command below to size the image proportionate to the video length
 # docker run -it -v `pwd`:`pwd` -w `pwd` --entrypoint=ffprobe --rm jrottenberg/ffmpeg -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 ./<VIDEO>
 
 # scan the video with ffmpeg and condense the whole thing into 1x1 pixel images. save the output into "frame number.png"
@@ -34,3 +35,6 @@ docker run -it -v `pwd`:`pwd` -w `pwd` --entrypoint=mogrify --rm dpokidov/imagem
 
 # resize to 12x36 aspect ratio (9168x3056) again, arbitrary numbers. size it to whatever you want
 docker run -it -v `pwd`:`pwd` -w `pwd` --entrypoint=convert --rm dpokidov/imagemagick "$IMG_NAME" -resize 9168x3056\! -quality 100 "$IMG_NAME"
+
+# generate an SVG as well
+docker run -it -v `pwd`:`pwd` -w `pwd` --entrypoint=npm --rm library/node run docker-start --prefix ./generate-svg "`pwd`/$OUTPUT_FOLDER" "$SVG_NAME"
