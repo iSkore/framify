@@ -17,3 +17,4 @@ Creating a more proportionate representation of each film.
 
 ##### Lord of the Rings Return of the King
 ![Lord of the Rings Return of the King](LordoftheRingsReturnoftheKing.png)
+![Lord of the Rings Return of the King](LordoftheRingsReturnoftheKing.svg)
